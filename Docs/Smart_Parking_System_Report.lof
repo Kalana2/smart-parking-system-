@@ -1,0 +1,28 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Overall System Architecture}}{22}{figure.caption.6}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Detection Service Internal Pipeline}}{26}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces ANPR Service Pipeline}}{30}{figure.caption.12}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Level 0 DFD --- Context Diagram}}{43}{figure.caption.15}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Level 1 DFD --- System Processes}}{44}{figure.caption.16}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Level 2 DFD --- Vehicle Detection Process}}{45}{figure.caption.17}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Entity Relationship Diagram}}{45}{figure.caption.18}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Sequence Diagram --- Vehicle Entry Workflow}}{46}{figure.caption.19}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces System Component Diagram}}{48}{figure.caption.20}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Docker Deployment Diagram}}{49}{figure.caption.21}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Admin Dashboard Layout}}{57}{figure.caption.31}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {11.1}{\ignorespaces Vehicle Detection Performance Comparison}}{70}{figure.caption.46}%
+\contentsline {figure}{\numberline {11.2}{\ignorespaces Service Response Time Comparison}}{72}{figure.caption.53}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

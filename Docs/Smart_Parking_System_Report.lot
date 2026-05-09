@@ -1,0 +1,42 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Technology Stack by Service}}{23}{table.caption.7}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Service Network Configuration}}{24}{table.caption.8}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Detection Service Configuration}}{27}{table.caption.10}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Dynamic Slot Classification}}{29}{table.caption.11}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Verification Service API}}{32}{table.caption.13}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces API Gateway Routes}}{35}{table.caption.14}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces RabbitMQ Exchange Configuration}}{50}{table.caption.22}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces Queue Bindings}}{50}{table.caption.23}%
+\contentsline {table}{\numberline {7.3}{\ignorespaces Event Ownership}}{51}{table.caption.24}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces Vehicles Table Schema}}{53}{table.caption.25}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Parking Slots Table Schema}}{54}{table.caption.26}%
+\contentsline {table}{\numberline {8.3}{\ignorespaces Parking Sessions Table Schema}}{54}{table.caption.27}%
+\contentsline {table}{\numberline {8.4}{\ignorespaces Events Table Schema}}{54}{table.caption.28}%
+\contentsline {table}{\numberline {8.5}{\ignorespaces Admin Users Table Schema}}{55}{table.caption.29}%
+\contentsline {table}{\numberline {8.6}{\ignorespaces Database Indexes}}{55}{table.caption.30}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {9.1}{\ignorespaces Video Feed Annotation Legend}}{60}{table.caption.41}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {10.1}{\ignorespaces Development Environment}}{61}{table.caption.42}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {11.1}{\ignorespaces Hardware Specifications}}{69}{table.caption.43}%
+\contentsline {table}{\numberline {11.2}{\ignorespaces Software Specifications}}{69}{table.caption.44}%
+\contentsline {table}{\numberline {11.3}{\ignorespaces Vehicle Detection Performance}}{70}{table.caption.45}%
+\contentsline {table}{\numberline {11.4}{\ignorespaces Slot Occupancy Detection Results}}{70}{table.caption.47}%
+\contentsline {table}{\numberline {11.5}{\ignorespaces ANPR Recognition Results}}{71}{table.caption.48}%
+\contentsline {table}{\numberline {11.6}{\ignorespaces ANPR Performance Under Different Conditions}}{71}{table.caption.49}%
+\contentsline {table}{\numberline {11.7}{\ignorespaces End-to-End System Performance}}{71}{table.caption.50}%
+\contentsline {table}{\numberline {11.8}{\ignorespaces Object Tracking Metrics}}{71}{table.caption.51}%
+\contentsline {table}{\numberline {11.9}{\ignorespaces Individual Service Response Times}}{72}{table.caption.52}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {12.1}{\ignorespaces System Comparison}}{75}{table.caption.54}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

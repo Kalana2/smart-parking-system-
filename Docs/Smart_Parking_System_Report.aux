@@ -1,0 +1,340 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {chapter}{Acknowledgements}{1}{chapter*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Abstract}{2}{chapter*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{12}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Background}{12}{section.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Problem Statement}{13}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Research Objectives}{13}{section.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.4}Scope of the Project}{14}{section.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}Significance of the Study}{14}{section.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.6}Report Structure}{15}{section.1.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Literature Review}{16}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Overview of Parking Management Systems}{16}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Manual Parking Systems}{16}{subsection.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Sensor-Based Parking Systems}{16}{subsection.2.1.2}\protected@file@percent }
+\citation{b1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Vision-Based Parking Systems}{17}{subsection.2.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Object Detection Models}{17}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}YOLO (You Only Look Once)}{17}{subsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}SSD (Single Shot Detector)}{18}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Faster R-CNN}{18}{subsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Automatic Number Plate Recognition (ANPR)}{18}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Object Tracking}{18}{section.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Centroid Tracking}{18}{subsection.2.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}SORT (Simple Online and Realtime Tracking)}{18}{subsection.2.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}DeepSORT}{19}{subsection.2.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Microservices Architecture}{19}{section.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Monolithic vs. Microservices}{19}{subsection.2.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Event-Driven Architecture}{19}{subsection.2.5.2}\protected@file@percent }
+\citation{b4}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Message Brokers}{20}{subsection.2.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.6}Containerization and Docker}{20}{section.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.7}Research Gap}{20}{section.2.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}System Architecture}{21}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Architectural Overview}{21}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Overall System Architecture Diagram}{22}{section.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Overall System Architecture}}{22}{figure.caption.6}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:system_arch}{{3.1}{22}{Overall System Architecture}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Architecture Principles}{22}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Technology Stack Summary}{23}{section.3.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Technology Stack by Service}}{23}{table.caption.7}\protected@file@percent }
+\newlabel{tab:tech_stack}{{3.1}{23}{Technology Stack by Service}{table.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Repository Structure}{23}{section.3.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.1}{\ignorespaces Repository Layout}}{23}{lstlisting.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.6}Container Networking}{24}{section.3.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Service Network Configuration}}{24}{table.caption.8}\protected@file@percent }
+\newlabel{tab:network}{{3.2}{24}{Service Network Configuration}{table.caption.8}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Microservices Design}{25}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Detection and Tracking Service}{25}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Overview}{25}{subsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Technology Stack}{25}{subsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Responsibilities}{25}{subsection.4.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Internal Architecture}{26}{subsection.4.1.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Detection Service Internal Pipeline}}{26}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:detection_pipeline}{{4.1}{26}{Detection Service Internal Pipeline}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Published Events}{26}{subsection.4.1.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.1}{\ignorespaces vehicle.detected.v1 Event Schema}}{26}{lstlisting.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.6}Configuration Parameters}{27}{subsection.4.1.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Detection Service Configuration}}{27}{table.caption.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Slot Detection Service}{27}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Overview}{27}{subsection.4.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Technology Stack}{27}{subsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Responsibilities}{27}{subsection.4.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}Published Events}{28}{subsection.4.2.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.2}{\ignorespaces slot.updated.v1 Event Schema}}{28}{lstlisting.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.5}Slot Configuration}{28}{subsection.4.2.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.3}{\ignorespaces Slot Definition Example}}{28}{lstlisting.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Dynamic Slot Detection Service}{28}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Overview}{28}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Technology Stack}{28}{subsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Responsibilities}{29}{subsection.4.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Vehicle Type Classification Thresholds}{29}{subsection.4.3.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Dynamic Slot Classification}}{29}{table.caption.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}Published Events}{29}{subsection.4.3.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.4}{\ignorespaces dynamic.slot.detected.v1 Event Schema}}{29}{lstlisting.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}ANPR Service}{29}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Overview}{29}{subsection.4.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Technology Stack}{30}{subsection.4.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}ANPR Pipeline}{30}{subsection.4.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces ANPR Service Pipeline}}{30}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:anpr_pipeline}{{4.2}{30}{ANPR Service Pipeline}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Image Preprocessing Steps}{31}{subsection.4.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}Published Events}{31}{subsection.4.4.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.5}{\ignorespaces plate.detected.v1 Event Schema}}{31}{lstlisting.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Vehicle Verification Service}{31}{section.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Overview}{31}{subsection.4.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Technology Stack}{31}{subsection.4.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Responsibilities}{32}{subsection.4.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.4}REST API Endpoints}{32}{subsection.4.5.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Verification Service API}}{32}{table.caption.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.5}Published Events}{32}{subsection.4.5.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.6}{\ignorespaces vehicle.verified.v1 Event Schema}}{32}{lstlisting.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Crash Detection Service}{32}{section.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Overview}{32}{subsection.4.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}Technology Stack}{32}{subsection.4.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.3}Detection Methods}{33}{subsection.4.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.4}Published Events}{33}{subsection.4.6.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.7}{\ignorespaces crash.detected.v1 Event Schema}}{33}{lstlisting.4.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Parking Aggregator Service}{33}{section.4.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.1}Overview}{33}{subsection.4.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.2}Technology Stack}{33}{subsection.4.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.3}Responsibilities}{34}{subsection.4.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.4}State Model}{34}{subsection.4.7.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.8}{\ignorespaces Aggregated Parking State}}{34}{lstlisting.4.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.8}Vehicle History Service}{34}{section.4.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.1}Overview}{34}{subsection.4.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.2}Technology Stack}{34}{subsection.4.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.3}Responsibilities}{35}{subsection.4.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.9}API Gateway}{35}{section.4.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.1}Overview}{35}{subsection.4.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.2}Technology Stack}{35}{subsection.4.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.3}API Endpoint Summary}{35}{subsection.4.9.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces API Gateway Routes}}{35}{table.caption.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.10}Web Dashboard (Frontend)}{36}{section.4.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.10.1}Technology Stack}{36}{subsection.4.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.10.2}Dashboard Modules}{36}{subsection.4.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Mathematical Modeling}{37}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Bounding Box Representation}{37}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Intersection over Union (IoU)}{37}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Slot Occupancy Decision}{38}{subsection.5.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Kalman Filter for Vehicle Tracking}{38}{section.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}State Vector}{38}{subsection.5.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}State Transition Model}{39}{subsection.5.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Measurement Model}{39}{subsection.5.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Prediction Step}{39}{subsection.5.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.5}Update Step}{40}{subsection.5.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.6}Innovation (Measurement Residual)}{40}{subsection.5.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Hungarian Algorithm for Data Association}{40}{section.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}Cost Matrix}{40}{subsection.5.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Optimization Objective}{40}{subsection.5.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Gating}{40}{subsection.5.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Dynamic Slot Space Estimation}{41}{section.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}Free Space Calculation}{41}{subsection.5.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}Gap Detection Between Vehicles}{41}{subsection.5.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}Vehicle Type Classification}{41}{subsection.5.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Performance Metrics}{41}{section.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.1}Precision}{41}{subsection.5.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.2}Recall}{41}{subsection.5.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.3}F1 Score}{41}{subsection.5.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.4}Mean Average Precision (mAP)}{42}{subsection.5.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.5}Frames Per Second (FPS)}{42}{subsection.5.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.6}MOTA (Multiple Object Tracking Accuracy)}{42}{subsection.5.6.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}System Modeling and Diagrams}{43}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Data Flow Diagram (DFD)}{43}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Level 0 --- Context Diagram}{43}{subsection.6.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Level 0 DFD --- Context Diagram}}{43}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:dfd_level0}{{6.1}{43}{Level 0 DFD --- Context Diagram}{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Level 1 --- System Decomposition}{44}{subsection.6.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Level 1 DFD --- System Processes}}{44}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:dfd_level1}{{6.2}{44}{Level 1 DFD --- System Processes}{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Level 2 --- Vehicle Detection Process}{45}{subsection.6.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Level 2 DFD --- Vehicle Detection Process}}{45}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:dfd_level2}{{6.3}{45}{Level 2 DFD --- Vehicle Detection Process}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Entity Relationship Diagram (ERD)}{45}{section.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces Entity Relationship Diagram}}{45}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:erd}{{6.4}{45}{Entity Relationship Diagram}{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Sequence Diagram}{46}{section.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Vehicle Entry Workflow}{46}{subsection.6.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces Sequence Diagram --- Vehicle Entry Workflow}}{46}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:sequence}{{6.5}{46}{Sequence Diagram --- Vehicle Entry Workflow}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}Component Diagram}{48}{section.6.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces System Component Diagram}}{48}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:component}{{6.6}{48}{System Component Diagram}{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.5}Deployment Diagram}{49}{section.6.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces Docker Deployment Diagram}}{49}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:deployment}{{6.7}{49}{Docker Deployment Diagram}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Event-Driven Communication}{50}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}Message Broker Architecture}{50}{section.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}Exchange and Queue Design}{50}{section.7.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces RabbitMQ Exchange Configuration}}{50}{table.caption.22}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7.2}{\ignorespaces Queue Bindings}}{50}{table.caption.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}Event Schemas}{51}{section.7.3}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7.1}{\ignorespaces Event Envelope Format}}{51}{lstlisting.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}Event Ownership Matrix}{51}{section.7.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7.3}{\ignorespaces Event Ownership}}{51}{table.caption.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.5}Error Handling and Reliability}{51}{section.7.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.1}Dead Letter Queue (DLQ)}{51}{subsection.7.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.2}Retry Mechanism}{51}{subsection.7.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.3}Message Acknowledgment}{52}{subsection.7.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.4}Idempotency}{52}{subsection.7.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Database Design}{53}{chapter.8}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Database Technology Selection}{53}{section.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Database Schema}{53}{section.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2.1}Vehicles Table}{53}{subsection.8.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Vehicles Table Schema}}{53}{table.caption.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2.2}Parking Slots Table}{54}{subsection.8.2.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.2}{\ignorespaces Parking Slots Table Schema}}{54}{table.caption.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2.3}Parking Sessions Table}{54}{subsection.8.2.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.3}{\ignorespaces Parking Sessions Table Schema}}{54}{table.caption.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2.4}Events Table}{54}{subsection.8.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.4}{\ignorespaces Events Table Schema}}{54}{table.caption.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2.5}Admin Users Table}{55}{subsection.8.2.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.5}{\ignorespaces Admin Users Table Schema}}{55}{table.caption.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.3}Redis Cache Schema}{55}{section.8.3}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8.1}{\ignorespaces Redis Key Structure}}{55}{lstlisting.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.4}Database Indexing Strategy}{55}{section.8.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.6}{\ignorespaces Database Indexes}}{55}{table.caption.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.5}SQL Schema Creation}{55}{section.8.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8.2}{\ignorespaces Database Creation Script}}{55}{lstlisting.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}Dashboard Design}{57}{chapter.9}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}Admin Dashboard}{57}{section.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.1}Overview}{57}{subsection.9.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.2}Dashboard Layout}{57}{subsection.9.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9.1}{\ignorespaces Admin Dashboard Layout}}{57}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:admin_dash}{{9.1}{57}{Admin Dashboard Layout}{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.3}Admin Dashboard Features}{58}{subsection.9.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Real-Time Overview Panel}{58}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Parking Slot Grid}{58}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Vehicle Management}{58}{section*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Alert Management}{58}{section*.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Analytics Dashboard}{59}{section*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{History and Logs}{59}{section*.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}User Dashboard}{59}{section.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.1}Overview}{59}{subsection.9.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2.2}User Dashboard Features}{59}{subsection.9.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Parking Availability View}{59}{section*.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Dynamic Free Space Display}{59}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Parking Guidance}{60}{section*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.3}Video Feed Annotation}{60}{section.9.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9.1}{\ignorespaces Video Feed Annotation Legend}}{60}{table.caption.41}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {9.1}{\ignorespaces Video Overlay Text}}{60}{lstlisting.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}Implementation}{61}{chapter.10}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}Development Environment}{61}{section.10.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10.1}{\ignorespaces Development Environment}}{61}{table.caption.42}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}Service Implementation Details}{61}{section.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.1}Detection Service Implementation}{61}{subsection.10.2.1}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10.1}{\ignorespaces Vehicle Detection Core Logic}}{61}{lstlisting.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.2}Slot Detection Implementation}{62}{subsection.10.2.2}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10.2}{\ignorespaces IoU-Based Slot Detection}}{63}{lstlisting.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.3}ANPR Implementation}{63}{subsection.10.2.3}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10.3}{\ignorespaces License Plate Recognition}}{63}{lstlisting.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2.4}Kalman Tracker Implementation}{64}{subsection.10.2.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10.4}{\ignorespaces Kalman Filter Tracker}}{64}{lstlisting.10.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.3}Docker Configuration}{65}{section.10.3}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10.5}{\ignorespaces Docker Compose Configuration}}{65}{lstlisting.10.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.4}Service Dockerfile Example}{67}{section.10.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10.6}{\ignorespaces Detection Service Dockerfile}}{67}{lstlisting.10.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}Results and Evaluation}{69}{chapter.11}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}Experimental Setup}{69}{section.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1.1}Hardware Configuration}{69}{subsection.11.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.1}{\ignorespaces Hardware Specifications}}{69}{table.caption.43}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1.2}Software Configuration}{69}{subsection.11.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.2}{\ignorespaces Software Specifications}}{69}{table.caption.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1.3}Dataset}{69}{subsection.11.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}Vehicle Detection Results}{70}{section.11.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.3}{\ignorespaces Vehicle Detection Performance}}{70}{table.caption.45}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11.1}{\ignorespaces Vehicle Detection Performance Comparison}}{70}{figure.caption.46}\protected@file@percent }
+\newlabel{fig:detection_results}{{11.1}{70}{Vehicle Detection Performance Comparison}{figure.caption.46}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.3}Slot Detection Accuracy}{70}{section.11.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.4}{\ignorespaces Slot Occupancy Detection Results}}{70}{table.caption.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.4}ANPR Performance}{71}{section.11.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.5}{\ignorespaces ANPR Recognition Results}}{71}{table.caption.48}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.6}{\ignorespaces ANPR Performance Under Different Conditions}}{71}{table.caption.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.5}System Performance}{71}{section.11.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.7}{\ignorespaces End-to-End System Performance}}{71}{table.caption.50}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.6}Tracking Performance}{71}{section.11.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.8}{\ignorespaces Object Tracking Metrics}}{71}{table.caption.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.7}Microservices Performance}{72}{section.11.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11.9}{\ignorespaces Individual Service Response Times}}{72}{table.caption.52}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11.2}{\ignorespaces Service Response Time Comparison}}{72}{figure.caption.53}\protected@file@percent }
+\newlabel{fig:service_response}{{11.2}{72}{Service Response Time Comparison}{figure.caption.53}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {12}Discussion}{73}{chapter.12}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {12.1}Advantages of the Proposed System}{73}{section.12.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1.1}Cost Effectiveness}{73}{subsection.12.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1.2}Scalability}{73}{subsection.12.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1.3}Fault Isolation}{73}{subsection.12.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1.4}Real-Time Performance}{73}{subsection.12.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1.5}Extensibility}{74}{subsection.12.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1.6}Enhanced Security}{74}{subsection.12.1.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.2}Limitations}{74}{section.12.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.1}Lighting Sensitivity}{74}{subsection.12.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.2}Occlusion Issues}{74}{subsection.12.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.3}Camera Positioning Dependency}{74}{subsection.12.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.4}OCR Accuracy}{74}{subsection.12.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.5}Infrastructure Requirements}{74}{subsection.12.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2.6}Dynamic Slot Detection Constraints}{75}{subsection.12.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.3}Comparison with Existing Systems}{75}{section.12.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {12.1}{\ignorespaces System Comparison}}{75}{table.caption.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12.4}Lessons Learned}{75}{section.12.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {13}Conclusion and Future Work}{76}{chapter.13}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {13.1}Conclusion}{76}{section.13.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13.2}Future Work}{77}{section.13.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2.1}Mobile Application Integration}{77}{subsection.13.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2.2}Predictive Analytics}{77}{subsection.13.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2.3}Edge Computing Deployment}{77}{subsection.13.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2.4}Smart Reservation System}{77}{subsection.13.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2.5}Cloud-Based Scaling}{78}{subsection.13.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2.6}Enhanced ANPR}{78}{subsection.13.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {13.2.7}Integration with Navigation Systems}{78}{subsection.13.2.7}\protected@file@percent }
+\bibcite{b1}{1}
+\bibcite{b2}{2}
+\bibcite{b3}{3}
+\bibcite{b4}{4}
+\bibcite{b5}{5}
+\bibcite{b6}{6}
+\bibcite{b7}{7}
+\bibcite{b8}{8}
+\bibcite{b9}{9}
+\bibcite{b10}{10}
+\bibcite{b11}{11}
+\bibcite{b12}{12}
+\bibcite{b13}{13}
+\bibcite{b14}{14}
+\bibcite{b15}{15}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Glossary}{81}{appendix.A}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}API Documentation}{82}{appendix.B}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\gdef \@abspage@last{83}
