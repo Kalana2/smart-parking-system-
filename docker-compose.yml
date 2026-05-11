@@ -1,0 +1,218 @@
+name: smart-parking-system
+
+x-common-environment: &common-environment
+  POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
+  POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+  POSTGRES_DB: ${POSTGRES_DB:-smart_parking}
+  POSTGRES_USER: ${POSTGRES_USER:-parking_admin}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-parking_password}
+  REDIS_HOST: ${REDIS_HOST:-redis}
+  REDIS_PORT: ${REDIS_PORT:-6379}
+  RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+  RABBITMQ_PORT: ${RABBITMQ_PORT:-5672}
+  RABBITMQ_USER: ${RABBITMQ_USER:-parking_admin}
+  RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-parking_password}
+
+x-app-common: &app-common
+  restart: unless-stopped
+  depends_on:
+    rabbitmq:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-smart_parking}
+      POSTGRES_USER: ${POSTGRES_USER:-parking_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-parking_password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./infra/docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-parking_admin} -d ${POSTGRES_DB:-smart_parking}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+      - ./infra/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-parking_admin}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-parking_password}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+      - ./infra/docker/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 20s
+
+  detection-service:
+    <<: *app-common
+    build:
+      context: ./services/detection-service
+    environment:
+      <<: *common-environment
+      PORT: 8001
+      MODEL_PATH: ${MODEL_PATH:-/app/models/yolov8n.pt}
+      CAMERA_SOURCE: ${CAMERA_SOURCE:-rtsp://your-camera-url}
+      CONFIDENCE_THRESHOLD: ${CONFIDENCE_THRESHOLD:-0.5}
+      FRAME_SKIP: ${FRAME_SKIP:-3}
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./models:/app/models:ro
+
+  slot-service:
+    <<: *app-common
+    build:
+      context: ./services/slot-service
+    environment:
+      <<: *common-environment
+      PORT: 8002
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8002:8002"
+
+  anpr-service:
+    <<: *app-common
+    build:
+      context: ./services/anpr-service
+    environment:
+      <<: *common-environment
+      PORT: 8003
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./models:/app/models:ro
+
+  dynamic-slot-service:
+    <<: *app-common
+    build:
+      context: ./services/dynamic-slot-service
+    environment:
+      <<: *common-environment
+      PORT: 8004
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8004:8004"
+
+  crash-detection-service:
+    <<: *app-common
+    build:
+      context: ./services/crash-detection-service
+    environment:
+      <<: *common-environment
+      PORT: 8005
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8005:8005"
+
+  verification-service:
+    <<: *app-common
+    build:
+      context: ./services/verification-service
+    environment:
+      <<: *common-environment
+      PORT: 3001
+      NODE_ENV: production
+    ports:
+      - "3001:3001"
+
+  aggregator-service:
+    <<: *app-common
+    build:
+      context: ./services/aggregator-service
+    environment:
+      <<: *common-environment
+      PORT: 3002
+      NODE_ENV: production
+    ports:
+      - "3002:3002"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  history-service:
+    <<: *app-common
+    build:
+      context: ./services/history-service
+    environment:
+      <<: *common-environment
+      PORT: 3003
+      NODE_ENV: production
+    ports:
+      - "3003:3003"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-gateway:
+    <<: *app-common
+    build:
+      context: ./services/api-gateway
+    environment:
+      <<: *common-environment
+      PORT: 5000
+      API_PORT: 5000
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      NODE_ENV: production
+    ports:
+      - "5000:5000"
+    depends_on:
+      verification-service:
+        condition: service_started
+      aggregator-service:
+        condition: service_started
+      history-service:
+        condition: service_started
+
+  frontend:
+    restart: unless-stopped
+    build:
+      context: ./frontend
+    environment:
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:5000}
+      PORT: 3000
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      api-gateway:
+        condition: service_started
+
+volumes:
+  postgres-data:
+  redis-data:
+  rabbitmq-data:

@@ -1,0 +1,94 @@
+name: smart-parking-system-dev
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+
+  redis:
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  detection-service:
+    environment:
+      NODE_ENV: development
+      PYTHONUNBUFFERED: "1"
+      WATCHFILES_FORCE_POLLING: "true"
+    volumes:
+      - ./services/detection-service:/app
+      - ./models:/app/models:ro
+
+  slot-service:
+    environment:
+      NODE_ENV: development
+      PYTHONUNBUFFERED: "1"
+      WATCHFILES_FORCE_POLLING: "true"
+    volumes:
+      - ./services/slot-service:/app
+
+  anpr-service:
+    environment:
+      NODE_ENV: development
+      PYTHONUNBUFFERED: "1"
+      WATCHFILES_FORCE_POLLING: "true"
+    volumes:
+      - ./services/anpr-service:/app
+      - ./models:/app/models:ro
+
+  dynamic-slot-service:
+    environment:
+      NODE_ENV: development
+      PYTHONUNBUFFERED: "1"
+      WATCHFILES_FORCE_POLLING: "true"
+    volumes:
+      - ./services/dynamic-slot-service:/app
+
+  crash-detection-service:
+    environment:
+      NODE_ENV: development
+      PYTHONUNBUFFERED: "1"
+      WATCHFILES_FORCE_POLLING: "true"
+    volumes:
+      - ./services/crash-detection-service:/app
+
+  verification-service:
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./services/verification-service:/app
+
+  aggregator-service:
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./services/aggregator-service:/app
+
+  history-service:
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./services/history-service:/app
+
+  api-gateway:
+    environment:
+      NODE_ENV: development
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-development}
+    volumes:
+      - ./services/api-gateway:/app
+
+  frontend:
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:5000}
+    volumes:
+      - ./frontend:/app
+      - frontend-node-modules:/app/node_modules
+
+volumes:
+  frontend-node-modules:
