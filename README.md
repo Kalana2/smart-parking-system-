@@ -1,4 +1,4 @@
-<![CDATA[# 🅿️ Smart Parking Management System
+# 🅿️ Smart Parking Management System
 
 **Real-Time Parking Detection Using Computer Vision & Event-Driven Microservices**
 
@@ -15,25 +15,25 @@ An intelligent, scalable parking management platform that uses **YOLOv8 deep lea
 
 ## 📑 Table of Contents
 
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [System Architecture](#-system-architecture)
-- [Microservices](#-microservices)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Environment Variables](#-environment-variables)
-- [Event-Driven Communication](#-event-driven-communication)
-- [API Endpoints](#-api-endpoints)
-- [Database Schema](#-database-schema)
-- [Screenshots](#-screenshots)
-- [Usage Examples](#-usage-examples)
-- [Performance Metrics](#-performance-metrics)
-- [Use Cases](#-use-cases)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Author](#-author)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [System Architecture](#system-architecture)
+- [Microservices](#microservices)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [Event-Driven Communication](#event-driven-communication)
+- [API Endpoints](#api-endpoints)
+- [Database Schema](#database-schema)
+- [Screenshots](#screenshots)
+- [Usage Examples](#usage-examples)
+- [Performance Metrics](#performance-metrics)
+- [Use Cases](#use-cases)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Author](#author)
 
 ---
 
@@ -65,6 +65,8 @@ The backend follows a **microservices architecture** where each service is indep
 | **Data Analytics** | ❌ None | ❌ None | ✅ Rich insights |
 
 ---
+
+## ✨ Key Features
 
 | Feature | Description |
 |---|---|
@@ -615,7 +617,7 @@ CREATE TABLE alerts (
 
 ---
 
-## 📸 Screenshots & Demo
+## 📸 Screenshots
 
 ### Dashboard Preview
 - **Admin Dashboard**: Real-time parking slot occupancy, vehicle tracking, and analytics
@@ -659,7 +661,7 @@ CREATE TABLE alerts (
 
 ---
 
-## � Quick Usage Examples
+## ⚡ Usage Examples
 
 ### Register a Vehicle
 
@@ -795,4 +797,3 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 ---
 
 ## ⭐ Star this repo if you find it useful!
-]]>
