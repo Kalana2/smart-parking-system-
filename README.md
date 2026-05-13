@@ -1,6 +1,4 @@
-<![CDATA[<div align="center">
-
-# 🅿️ Smart Parking Management System
+<![CDATA[# 🅿️ Smart Parking Management System
 
 **Real-Time Parking Detection Using Computer Vision & Event-Driven Microservices**
 
@@ -11,11 +9,7 @@
 [![RabbitMQ](https://img.shields.io/badge/RabbitMQ-Event%20Broker-FF6600?logo=rabbitmq&logoColor=white)](https://rabbitmq.com)
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF?logo=yolo&logoColor=black)](https://ultralytics.com)
 
----
-
 An intelligent, scalable parking management platform that uses **YOLOv8 deep learning**, **Automatic Number Plate Recognition (ANPR)**, and an **event-driven microservices architecture** to monitor parking occupancy, identify vehicles, detect crashes, and provide real-time dashboards — all orchestrated with **RabbitMQ** and containerized with **Docker**.
-
-</div>
 
 ---
 
@@ -74,48 +68,24 @@ The backend follows a **microservices architecture** where each service is indep
 ## 🏗 System Architecture
 
 ```
-                    ┌──────────────┐
-                    │  Camera Feed │
-                    └──────┬───────┘
-                           │
-                    ┌──────▼───────┐
-                    │  Detection + │
-                    │  Tracking    │
-                    │  Service     │
-                    └──────┬───────┘
-                           │ vehicle.detected
-                    ┌──────▼───────┐
-                    │   RabbitMQ   │
-                    │ Event Broker │
-                    └──┬──┬──┬──┬──┘
-                       │  │  │  │
-          ┌────────────┘  │  │  └────────────┐
-          │               │  │               │
-   ┌──────▼──────┐ ┌──────▼──────┐ ┌────────▼────┐ ┌──────▼──────┐
-   │    Slot     │ │    ANPR     │ │  Dynamic    │ │   Crash     │
-   │   Service   │ │   Service   │ │  Slot Svc   │ │  Detection  │
-   └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
-          │               │               │               │
-          │         ┌─────▼──────┐        │               │
-          │         │Verification│        │               │
-          │         │  Service   │        │               │
-          │         └─────┬──────┘        │               │
-          │               │               │               │
-          └───────┬───────┴───────┬───────┘               │
-                  │               │                       │
-           ┌──────▼───────┐ ┌────▼─────┐                 │
-           │   Parking    │ │ History  │◄────────────────┘
-           │  Aggregator  │ │ Service  │
-           └──────┬───────┘ └──────────┘
-                  │
-           ┌──────▼───────┐
-           │  API Gateway │
-           └──────┬───────┘
-                  │
-           ┌──────▼───────┐
-           │     Web      │
-           │  Dashboard   │
-           └──────────────┘
+Camera Feed
+    ↓
+Detection + Tracking Service (YOLOv8 + DeepSORT)
+    ↓ [vehicle.detected]
+RabbitMQ Event Broker
+    ↓↓↓↓
+    ├→ Slot Service → [slot.updated]
+    ├→ ANPR Service → [plate.detected] → Verification Service → [vehicle.verified]
+    ├→ Dynamic Slot Service → [dynamic.slot.detected]
+    └→ Crash Detection → [crash.detected]
+    ↓
+Parking Aggregator (NestJS + Redis)
+    ↓
+API Gateway (JWT Auth, Rate Limiting)
+    ↓
+History Service (Event Logging)
+    ↓
+Web Dashboard (React + WebSocket)
 ```
 
 ### Architecture Principles
@@ -441,19 +411,19 @@ All services communicate asynchronously through RabbitMQ. Here are the core even
 ### Event Flow
 
 ```
-Camera → Detection Service
-              │
-              ├── vehicle.detected ──→ Slot Service ──→ slot.updated
-              ├── vehicle.detected ──→ ANPR Service ──→ plate.detected
-              │                                              │
-              │                                    Verification Service
-              │                                              │
-              │                                    vehicle.verified
-              ├── vehicle.detected ──→ Dynamic Slot ──→ dynamic.slot.detected
-              └── vehicle.detected ──→ Crash Detection ──→ crash.detected
-                                                              │
-                                          All events ──→ Aggregator ──→ Dashboard
-                                                    └──→ History Service
+Camera → Detection Service (vehicle.detected)
+    ↓
+    ├→ Slot Service (slot.updated)
+    │
+    ├→ ANPR Service (plate.detected)
+    │   └→ Verification Service (vehicle.verified)
+    │
+    ├→ Dynamic Slot Service (dynamic.slot.detected)
+    │
+    └→ Crash Detection Service (crash.detected)
+        ↓
+        All Events → Aggregator Service → Dashboard
+                  └→ History Service (Event Logging)
 ```
 
 ### Event Schemas
@@ -664,9 +634,5 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ---
 
-<div align="center">
-
-**⭐ Star this repo if you find it useful!**
-
-</div>
+## ⭐ Star this repo if you find it useful!
 ]]>
