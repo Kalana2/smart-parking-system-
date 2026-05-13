@@ -1,0 +1,210 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{graphicx}
+
+\title{Detection Service Overview}
+\author{Smart Parking Management System}
+\date{May 13, 2026}
+
+\begin{document}
+\maketitle
+
+\section{Scope and Status}
+This document describes the detection service only. It focuses on the intended behavior and data flow based on the system architecture and the Docker Compose configuration. The source files under \texttt{services/detection-service/src} are currently empty in this workspace, so implementation details are described at a design level.
+
+\section{Purpose}
+The detection service is the entry point of the computer-vision pipeline. It ingests a camera stream, detects vehicles, tracks them across frames, and emits structured events to the message broker for downstream services. This service is intentionally stateless beyond in-memory tracking state so it can be restarted or scaled horizontally without database coordination.
+
+\section{Inputs and Outputs}
+\subsection*{Inputs}
+\begin{itemize}
+  \item Camera stream or video source (e.g., RTSP URL)
+  \item Model weights for vehicle detection
+  \item Runtime configuration (thresholds, frame skipping)
+\end{itemize}
+
+\subsection*{Outputs}
+\begin{itemize}
+  \item \texttt{vehicle.detected.v1} events published to RabbitMQ
+  \item Optional HTTP stream endpoint for live previews (if implemented)
+  \item Logs and metrics for throughput, inference latency, and error rates
+\end{itemize}
+
+\section{Processing Pipeline}
+The detection service can be described as a frame-based pipeline with a strict order of operations:
+
+\begin{enumerate}
+  \item \textbf{Frame acquisition}: Open the camera stream or file. When reading fails, the service should either reconnect with backoff or fail fast depending on configuration.
+  \item \textbf{Preprocessing}: Convert color space, resize to model input size, and apply optional normalization.
+  \item \textbf{Inference}: Run YOLOv8 to produce bounding boxes, class labels, and confidence scores.
+  \item \textbf{Filtering}: Discard detections below \texttt{CONFIDENCE\_THRESHOLD}. Optionally restrict to vehicle classes only to avoid emitting irrelevant objects.
+  \item \textbf{Tracking}: Assign persistent track IDs across frames using a tracker (e.g., DeepSORT). This step maintains short-lived state in memory.
+  \item \textbf{Event assembly}: Construct a \texttt{vehicle.detected.v1} payload with the frame ID, timestamp, camera ID, and a list of tracked vehicles.
+  \item \textbf{Publish}: Send the event to RabbitMQ with a durable exchange and appropriate routing key.
+\end{enumerate}
+
+\subsection*{Why This Order Matters}
+Detection must happen before tracking because the tracker needs fresh detections per frame. Filtering before tracking reduces false-positive tracks and lowers compute cost. Publishing happens last to ensure each message represents a coherent snapshot of detections and tracking IDs.
+
+\section{Configuration}
+The following environment variables are defined for the detection service in \texttt{docker-compose.yml}:
+
+\begin{longtable}{p{0.32\textwidth}p{0.58\textwidth}}
+\textbf{Variable} & \textbf{Purpose} \\
+\hline
+\texttt{PORT} & HTTP service port (default 8001) \\
+\texttt{MODEL\_PATH} & Path to the YOLOv8 model file inside the container \\
+\texttt{CAMERA\_SOURCE} & Camera stream URL or file path \\
+\texttt{CONFIDENCE\_THRESHOLD} & Minimum detection confidence \\
+\texttt{FRAME\_SKIP} & Process every Nth frame for performance \\
+\texttt{PYTHONUNBUFFERED} & Flush logs immediately for containerized runtime \\
+\texttt{RABBITMQ\_HOST} & RabbitMQ hostname \\
+\texttt{RABBITMQ\_PORT} & RabbitMQ port \\
+\texttt{RABBITMQ\_USER} & RabbitMQ user \\
+\texttt{RABBITMQ\_PASSWORD} & RabbitMQ password \\
+\end{longtable}
+
+\subsection*{Configuration Rationale}
+\begin{itemize}
+  \item \texttt{CONFIDENCE\_THRESHOLD} trades recall for precision. Higher values reduce false positives but may miss distant vehicles.
+  \item \texttt{FRAME\_SKIP} is the primary throughput control for CPU-bound systems.
+  \item \texttt{MODEL\_PATH} enables swapping models without code changes.
+\end{itemize}
+
+\section{Runtime Behavior}
+\subsection*{Frame Skipping}
+The service can process every \texttt{FRAME\_SKIP}th frame to reduce compute cost. For example, a value of 3 means one frame is processed and two are skipped. This should be balanced against tracking stability and event latency.
+
+\subsection*{Model Loading}
+The model is loaded once at startup from \texttt{MODEL\_PATH}. If the file is missing or incompatible, the service should fail during boot to surface the problem immediately.
+
+\subsection*{Tracking State}
+Tracking maintains short-lived, in-memory state for each active vehicle. This state is reset on restart, which is acceptable because downstream services do not require persistent track history.
+
+\section{Service Directory Layout}
+The expected structure for the detection service is:
+
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+services/detection-service/
+  Dockerfile
+  requirements.txt
+  src/
+    __init__.py
+    main.py
+    config.py
+    detector.py
+    tracker.py
+    publisher.py
+    consumer.py
+    utils/
+      __init__.py
+      preprocessing.py
+      bbox.py
+\end{lstlisting}
+
+\section{Module Responsibilities}
+\begin{itemize}
+  \item \texttt{main.py}: Application entry point. Initializes configuration, opens the camera stream, runs the loop, and hosts any HTTP endpoints.
+  \item \texttt{config.py}: Loads environment variables and validates defaults.
+  \item \texttt{detector.py}: Runs YOLOv8 inference and returns bounding boxes and confidences.
+  \item \texttt{tracker.py}: Associates detections across frames (e.g., DeepSORT) to provide track IDs.
+  \item \texttt{publisher.py}: Publishes events to RabbitMQ with retry and error handling.
+  \item \texttt{consumer.py}: Optional module for ingesting upstream events (if needed).
+  \item \texttt{utils/*}: Preprocessing utilities, coordinate conversion, and bounding box helpers.
+\end{itemize}
+
+\section{Data Flow}
+The detection service fits into the system as follows:
+
+\begin{enumerate}
+  \item Capture a frame from the configured camera source.
+  \item Preprocess the frame (resize, normalize, or color conversion).
+  \item Run YOLOv8 inference to detect vehicles.
+  \item Run tracking to assign persistent IDs across frames.
+  \item Emit a \texttt{vehicle.detected.v1} event to RabbitMQ.
+  \item Downstream services consume the event (slot, ANPR, dynamic-slot, crash detection).
+\end{enumerate}
+
+\subsection*{Event Field Semantics}
+\begin{itemize}
+  \item \texttt{event\_id}: Unique ID for idempotency and tracing.
+  \item \texttt{timestamp}: UTC time when the frame was processed.
+  \item \texttt{frame\_id}: Monotonic counter used to align events with video frames.
+  \item \texttt{camera\_id}: Logical camera identifier for multi-camera setups.
+  \item \texttt{vehicles}: Array of tracked vehicles for this frame.
+  \item \texttt{track\_id}: Stable identifier across frames until the vehicle leaves the scene.
+  \item \texttt{bbox}: Bounding box in pixel coordinates, typically \texttt{[x1, y1, x2, y2]}.
+\end{itemize}
+
+\section{Integration Points}
+\subsection*{RabbitMQ}
+The service should publish to a durable exchange to avoid losing detection events. Messages should include a unique \texttt{event\_id} and timestamp to enable idempotent handling downstream.
+
+\subsection*{Downstream Consumers}
+\begin{itemize}
+  \item \textbf{Slot Service}: Maps detections to fixed parking slots.
+  \item \textbf{ANPR Service}: Runs plate detection and OCR on detected vehicles.
+  \item \textbf{Dynamic Slot Service}: Detects free gaps between vehicles.
+  \item \textbf{Crash Detection}: Monitors speed and overlap anomalies.
+\end{itemize}
+
+\section{Event Contract}
+A typical event payload (from the system documentation) looks like:
+
+\begin{lstlisting}[basicstyle=\ttfamily\small]
+{
+  "event_id": "uuid-string",
+  "timestamp": "2026-05-01T10:30:00Z",
+  "frame_id": 1542,
+  "camera_id": "cam_01",
+  "vehicles": [
+    {
+      "track_id": 12,
+      "class": "car",
+      "bbox": [120, 80, 250, 180],
+      "confidence": 0.94
+    }
+  ]
+}
+\end{lstlisting}
+
+\section{Dependencies}
+The detection service should declare all Python dependencies in \texttt{requirements.txt}. Typical packages include:
+
+\begin{itemize}
+  \item \texttt{ultralytics} for YOLOv8 inference
+  \item \texttt{opencv-python} for frame capture and preprocessing
+  \item \texttt{numpy} for numerical operations
+  \item \texttt{pika} or \texttt{aio-pika} for RabbitMQ publishing
+  \item A tracker library such as \texttt{deep-sort-realtime}
+\end{itemize}
+
+\section{Operational Notes}
+\begin{itemize}
+  \item The container mounts \texttt{./models} to \texttt{/app/models} in Docker Compose.
+  \item The service expects a valid model file at \texttt{MODEL\_PATH}.
+  \item If the camera URL is not reachable, the service should fail fast with clear logs.
+  \item For large camera feeds, GPU acceleration is recommended for stable FPS.
+  \item Consider bounding queue sizes in RabbitMQ to prevent memory growth under high load.
+\end{itemize}
+
+\section{Failure Modes and Recovery}
+\begin{itemize}
+  \item \textbf{Camera disconnect}: Reconnect with backoff or exit with a clear error.
+  \item \textbf{Model load failure}: Exit during startup to prevent silent misbehavior.
+  \item \textbf{RabbitMQ outage}: Buffer briefly in memory and retry publishing, or fail fast based on tolerance requirements.
+  \item \textbf{High CPU/GPU load}: Increase \texttt{FRAME\_SKIP}, lower input resolution, or scale replicas.
+\end{itemize}
+
+\section{Next Steps}
+Once implementation is added, update this document with:
+\begin{itemize}
+  \item Actual runtime endpoints and health checks
+  \item Exact dependency list from \texttt{requirements.txt}
+  \item Any additional configuration options
+\end{itemize}
+
+\end{document}

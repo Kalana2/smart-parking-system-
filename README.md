@@ -53,33 +53,33 @@ The backend follows a **microservices architecture** where each service is indep
 
 ## 🎯 Why Smart Parking System?
 
-| Aspect | Traditional Sensors | Manual Attendants | **This System** |
-|--------|:---:|:---:|:---:|
-| **Cost** | 💰💰💰 High | 💰💰💰 High Labor | 💰 Low (camera + software) |
-| **Scalability** | ⚠️ Limited | ❌ Not scalable | ✅ Highly scalable |
-| **Accuracy** | ⚠️ 85-90% | ⚠️ 70-80% | ✅ 95%+ |
-| **Real-time Updates** | ⚠️ Delayed | ⚠️ Manual | ✅ Live (sub-second) |
-| **Vehicle Identification** | ❌ No | ⚠️ Manual | ✅ Automatic ANPR |
-| **Maintenance** | ⚠️ Complex | ⚠️ High | ✅ Minimal |
-| **Installation Time** | ⚠️ Weeks | ⚠️ Weeks | ✅ Days |
-| **Data Analytics** | ❌ None | ❌ None | ✅ Rich insights |
+| Aspect                     | Traditional Sensors | Manual Attendants |      **This System**       |
+| -------------------------- | :-----------------: | :---------------: | :------------------------: |
+| **Cost**                   |     💰💰💰 High     | 💰💰💰 High Labor | 💰 Low (camera + software) |
+| **Scalability**            |     ⚠️ Limited      |  ❌ Not scalable  |     ✅ Highly scalable     |
+| **Accuracy**               |      ⚠️ 85-90%      |     ⚠️ 70-80%     |          ✅ 95%+           |
+| **Real-time Updates**      |     ⚠️ Delayed      |     ⚠️ Manual     |    ✅ Live (sub-second)    |
+| **Vehicle Identification** |        ❌ No        |     ⚠️ Manual     |     ✅ Automatic ANPR      |
+| **Maintenance**            |     ⚠️ Complex      |      ⚠️ High      |         ✅ Minimal         |
+| **Installation Time**      |      ⚠️ Weeks       |     ⚠️ Weeks      |          ✅ Days           |
+| **Data Analytics**         |       ❌ None       |      ❌ None      |      ✅ Rich insights      |
 
 ---
 
 ## ✨ Key Features
 
-| Feature | Description |
-|---|---|
-| 🚗 **Vehicle Detection & Tracking** | YOLOv8 + DeepSORT for real-time multi-vehicle detection with persistent tracking IDs |
-| 🅿️ **Slot Occupancy Monitoring** | IoU-based matching of vehicles to predefined parking slot coordinates |
-| 🔍 **ANPR (License Plate Recognition)** | Two-stage pipeline: YOLOv8 plate detection → Tesseract/EasyOCR text extraction |
-| 📐 **Dynamic Free Space Detection** | Identifies unmarked gaps between vehicles and classifies by vehicle type compatibility |
-| 💥 **Crash Detection** | Monitors bounding box overlaps, velocity anomalies, and erratic trajectories |
-| ✅ **Vehicle Verification** | Checks detected plates against registered vehicle database in real time |
-| 📊 **Real-Time Dashboard** | Admin and user dashboards with WebSocket-powered live updates |
-| 📜 **Session History** | Complete timestamped logs of all parking sessions, entries, exits, and alerts |
-| 🐳 **Containerized Deployment** | Each service runs in its own Docker container via Docker Compose |
-| 📨 **Event-Driven Architecture** | Loosely-coupled services communicating through RabbitMQ exchanges and queues |
+| Feature                                 | Description                                                                            |
+| --------------------------------------- | -------------------------------------------------------------------------------------- |
+| 🚗 **Vehicle Detection & Tracking**     | YOLOv8 + DeepSORT for real-time multi-vehicle detection with persistent tracking IDs   |
+| 🅿️ **Slot Occupancy Monitoring**        | IoU-based matching of vehicles to predefined parking slot coordinates                  |
+| 🔍 **ANPR (License Plate Recognition)** | Two-stage pipeline: YOLOv8 plate detection → Tesseract/EasyOCR text extraction         |
+| 📐 **Dynamic Free Space Detection**     | Identifies unmarked gaps between vehicles and classifies by vehicle type compatibility |
+| 💥 **Crash Detection**                  | Monitors bounding box overlaps, velocity anomalies, and erratic trajectories           |
+| ✅ **Vehicle Verification**             | Checks detected plates against registered vehicle database in real time                |
+| 📊 **Real-Time Dashboard**              | Admin and user dashboards with WebSocket-powered live updates                          |
+| 📜 **Session History**                  | Complete timestamped logs of all parking sessions, entries, exits, and alerts          |
+| 🐳 **Containerized Deployment**         | Each service runs in its own Docker container via Docker Compose                       |
+| 📨 **Event-Driven Architecture**        | Loosely-coupled services communicating through RabbitMQ exchanges and queues           |
 
 ---
 
@@ -121,36 +121,36 @@ Web Dashboard (React + WebSocket)
 
 ### Python Services (Computer Vision Pipeline)
 
-| # | Service | Port | Description |
-|---|---------|------|-------------|
-| 1 | **Detection + Tracking** | 8001 | Processes camera frames with YOLOv8, assigns persistent track IDs via DeepSORT |
-| 2 | **Slot Service** | 8002 | Matches vehicle bounding boxes to predefined slot coordinates using IoU (Shapely) |
-| 3 | **ANPR Service** | 8003 | Detects license plates (YOLOv8) and extracts text (Tesseract OCR) |
-| 4 | **Dynamic Slot Service** | 8004 | Identifies unmarked free spaces between vehicles, classifies by vehicle type |
-| 5 | **Crash Detection** | 8005 | Monitors velocity anomalies, bounding box overlaps, and erratic trajectories |
+| #   | Service                  | Port | Description                                                                       |
+| --- | ------------------------ | ---- | --------------------------------------------------------------------------------- |
+| 1   | **Detection + Tracking** | 8001 | Processes camera frames with YOLOv8, assigns persistent track IDs via DeepSORT    |
+| 2   | **Slot Service**         | 8002 | Matches vehicle bounding boxes to predefined slot coordinates using IoU (Shapely) |
+| 3   | **ANPR Service**         | 8003 | Detects license plates (YOLOv8) and extracts text (Tesseract OCR)                 |
+| 4   | **Dynamic Slot Service** | 8004 | Identifies unmarked free spaces between vehicles, classifies by vehicle type      |
+| 5   | **Crash Detection**      | 8005 | Monitors velocity anomalies, bounding box overlaps, and erratic trajectories      |
 
 ### Node.js Services (Business Logic & API)
 
-| # | Service | Port | Description |
-|---|---------|------|-------------|
-| 6 | **Verification Service** | 3001 | Validates detected plates against registered vehicle database (Express + Sequelize) |
-| 7 | **Parking Aggregator** | 3002 | Central brain — combines all service data into unified parking state (NestJS + Redis) |
-| 8 | **History Service** | 3003 | Event store for all parking sessions, entries, exits, and alerts (Express + Sequelize) |
-| 9 | **API Gateway** | 5000 | Single entry point with JWT auth, rate limiting, and route proxying (NestJS) |
+| #   | Service                  | Port | Description                                                                            |
+| --- | ------------------------ | ---- | -------------------------------------------------------------------------------------- |
+| 6   | **Verification Service** | 3001 | Validates detected plates against registered vehicle database (Express + Sequelize)    |
+| 7   | **Parking Aggregator**   | 3002 | Central brain — combines all service data into unified parking state (NestJS + Redis)  |
+| 8   | **History Service**      | 3003 | Event store for all parking sessions, entries, exits, and alerts (Express + Sequelize) |
+| 9   | **API Gateway**          | 5000 | Single entry point with JWT auth, rate limiting, and route proxying (NestJS)           |
 
 ### Frontend
 
-| # | Service | Port | Description |
-|---|---------|------|-------------|
-| 10 | **Web Dashboard** | 3000 | React.js admin/user dashboards with real-time WebSocket updates |
+| #   | Service           | Port | Description                                                     |
+| --- | ----------------- | ---- | --------------------------------------------------------------- |
+| 10  | **Web Dashboard** | 3000 | React.js admin/user dashboards with real-time WebSocket updates |
 
 ### Infrastructure Services
 
-| Service | Port | Purpose |
-|---------|------|---------|
-| **RabbitMQ** | 5672 / 15672 | Message broker (AMQP + Management UI) |
-| **PostgreSQL** | 5432 | Primary database |
-| **Redis** | 6379 | Real-time state cache |
+| Service        | Port         | Purpose                               |
+| -------------- | ------------ | ------------------------------------- |
+| **RabbitMQ**   | 5672 / 15672 | Message broker (AMQP + Management UI) |
+| **PostgreSQL** | 5432         | Primary database                      |
+| **Redis**      | 6379         | Real-time state cache                 |
 
 ---
 
@@ -379,12 +379,12 @@ make restart     # Restart all services
 
 ### 5. Access the Application
 
-| Service | URL | Purpose |
-|---------|-----|---------|
-| 🖥️ **Web Dashboard** | [http://localhost:3000](http://localhost:3000) | Admin & user interfaces |
-| 🔌 **API Gateway** | [http://localhost:5000](http://localhost:5000) | REST API endpoint |
-| 🐰 **RabbitMQ UI** | [http://localhost:15672](http://localhost:15672) | Message broker admin (guest/guest) |
-| 📊 **Live Camera Stream** | [http://localhost:8001/stream](http://localhost:8001/stream) | Detection service video feed |
+| Service                   | URL                                                          | Purpose                            |
+| ------------------------- | ------------------------------------------------------------ | ---------------------------------- |
+| 🖥️ **Web Dashboard**      | [http://localhost:3000](http://localhost:3000)               | Admin & user interfaces            |
+| 🔌 **API Gateway**        | [http://localhost:5000](http://localhost:5000)               | REST API endpoint                  |
+| 🐰 **RabbitMQ UI**        | [http://localhost:15672](http://localhost:15672)             | Message broker admin (guest/guest) |
+| 📊 **Live Camera Stream** | [http://localhost:8001/stream](http://localhost:8001/stream) | Detection service video feed       |
 
 ### 6. Quick Test
 
@@ -468,20 +468,21 @@ Camera → Detection Service (vehicle.detected)
 
 ```json
 {
-    "event_id": "uuid-string",
-    "timestamp": "2026-05-01T10:30:00Z",
-    "frame_id": 1542,
-    "camera_id": "cam_01",
-    "vehicles": [
-        {
-            "track_id": 12,
-            "class": "car",
-            "bbox": [120, 80, 250, 180],
-            "confidence": 0.94
-        }
-    ]
+  "event_id": "uuid-string",
+  "timestamp": "2026-05-01T10:30:00Z",
+  "frame_id": 1542,
+  "camera_id": "cam_01",
+  "vehicles": [
+    {
+      "track_id": 12,
+      "class": "car",
+      "bbox": [120, 80, 250, 180],
+      "confidence": 0.94
+    }
+  ]
 }
 ```
+
 </details>
 
 <details>
@@ -489,15 +490,16 @@ Camera → Detection Service (vehicle.detected)
 
 ```json
 {
-    "event_id": "uuid-string",
-    "timestamp": "2026-05-01T10:30:01Z",
-    "camera_id": "cam_01",
-    "slot_id": "S12",
-    "status": "occupied",
-    "track_id": 12,
-    "iou_score": 0.72
+  "event_id": "uuid-string",
+  "timestamp": "2026-05-01T10:30:01Z",
+  "camera_id": "cam_01",
+  "slot_id": "S12",
+  "status": "occupied",
+  "track_id": 12,
+  "iou_score": 0.72
 }
 ```
+
 </details>
 
 <details>
@@ -505,14 +507,15 @@ Camera → Detection Service (vehicle.detected)
 
 ```json
 {
-    "event_id": "uuid-string",
-    "timestamp": "2026-05-01T10:30:01Z",
-    "track_id": 12,
-    "plate_number": "ABC-1234",
-    "confidence": 0.91,
-    "plate_region": [145, 120, 80, 25]
+  "event_id": "uuid-string",
+  "timestamp": "2026-05-01T10:30:01Z",
+  "track_id": 12,
+  "plate_number": "ABC-1234",
+  "confidence": 0.91,
+  "plate_region": [145, 120, 80, 25]
 }
 ```
+
 </details>
 
 <details>
@@ -520,14 +523,15 @@ Camera → Detection Service (vehicle.detected)
 
 ```json
 {
-    "event_id": "uuid-string",
-    "timestamp": "2026-05-01T10:30:02Z",
-    "plate_number": "ABC-1234",
-    "registered": true,
-    "owner": "John Silva",
-    "vehicle_type": "car"
+  "event_id": "uuid-string",
+  "timestamp": "2026-05-01T10:30:02Z",
+  "plate_number": "ABC-1234",
+  "registered": true,
+  "owner": "John Silva",
+  "vehicle_type": "car"
 }
 ```
+
 </details>
 
 <details>
@@ -535,14 +539,15 @@ Camera → Detection Service (vehicle.detected)
 
 ```json
 {
-    "event_id": "uuid-string",
-    "timestamp": "2026-05-01T10:30:05Z",
-    "camera_id": "cam_01",
-    "track_ids": [12, 15],
-    "severity": "high",
-    "location": [320, 240]
+  "event_id": "uuid-string",
+  "timestamp": "2026-05-01T10:30:05Z",
+  "camera_id": "cam_01",
+  "track_ids": [12, 15],
+  "severity": "high",
+  "location": [320, 240]
 }
 ```
+
 </details>
 
 ---
@@ -551,30 +556,30 @@ Camera → Detection Service (vehicle.detected)
 
 ### Vehicle Management (via API Gateway → Verification Service)
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/vehicles` | Register a new vehicle |
-| `GET` | `/api/vehicles` | List all registered vehicles |
-| `GET` | `/api/vehicles/:plate` | Get vehicle details by plate |
-| `PUT` | `/api/vehicles/:plate` | Update vehicle information |
-| `DELETE` | `/api/vehicles/:plate` | Remove a vehicle |
+| Method   | Endpoint               | Description                  |
+| -------- | ---------------------- | ---------------------------- |
+| `POST`   | `/api/vehicles`        | Register a new vehicle       |
+| `GET`    | `/api/vehicles`        | List all registered vehicles |
+| `GET`    | `/api/vehicles/:plate` | Get vehicle details by plate |
+| `PUT`    | `/api/vehicles/:plate` | Update vehicle information   |
+| `DELETE` | `/api/vehicles/:plate` | Remove a vehicle             |
 
 ### Parking Status (via API Gateway → Aggregator)
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/parking/status` | Get real-time parking overview |
-| `GET` | `/api/parking/slots` | Get all slot statuses |
-| `GET` | `/api/parking/available` | Get available slots count |
-| `WS` | `/ws/parking` | WebSocket for live updates |
+| Method | Endpoint                 | Description                    |
+| ------ | ------------------------ | ------------------------------ |
+| `GET`  | `/api/parking/status`    | Get real-time parking overview |
+| `GET`  | `/api/parking/slots`     | Get all slot statuses          |
+| `GET`  | `/api/parking/available` | Get available slots count      |
+| `WS`   | `/ws/parking`            | WebSocket for live updates     |
 
 ### History (via API Gateway → History Service)
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/history/sessions` | Get parking session history |
-| `GET` | `/api/history/alerts` | Get crash/unauthorized alerts |
-| `GET` | `/api/history/vehicle/:plate` | Get history for a vehicle |
+| Method | Endpoint                      | Description                   |
+| ------ | ----------------------------- | ----------------------------- |
+| `GET`  | `/api/history/sessions`       | Get parking session history   |
+| `GET`  | `/api/history/alerts`         | Get crash/unauthorized alerts |
+| `GET`  | `/api/history/vehicle/:plate` | Get history for a vehicle     |
 
 ---
 
@@ -620,10 +625,12 @@ CREATE TABLE alerts (
 ## 📸 Screenshots
 
 ### Dashboard Preview
+
 - **Admin Dashboard**: Real-time parking slot occupancy, vehicle tracking, and analytics
 - **User Dashboard**: Available slots, vehicle management, and parking history
 
 ### System Visualizations
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │         ADMIN DASHBOARD - REAL-TIME MONITORING          │
@@ -649,6 +656,7 @@ CREATE TABLE alerts (
 ```
 
 ### Key Visual Features
+
 - 🎥 **Live Camera Feed** with YOLOv8 detection bounding boxes
 - 📊 **Real-time Statistics** - occupancy rate, average dwell time
 - 🗺️ **Parking Lot Heatmap** - color-coded slot availability
@@ -657,6 +665,7 @@ CREATE TABLE alerts (
 - 📈 **Analytics Dashboard** - historical trends and reports
 
 ### Architecture Diagram
+
 > See [docs/Smart_Parking_System_Report.pdf](docs/Smart_Parking_System_Report.pdf) for detailed architecture and system design documentation.
 
 ---
@@ -696,14 +705,14 @@ curl http://localhost:5000/api/parking/status \
 
 ```javascript
 // Connect to real-time parking updates
-const ws = new WebSocket('ws://localhost:5000/ws/parking');
+const ws = new WebSocket("ws://localhost:5000/ws/parking");
 
 ws.onmessage = (event) => {
   const update = JSON.parse(event.data);
-  console.log('Parking status updated:', update);
+  console.log("Parking status updated:", update);
 };
 
-ws.onclose = () => console.log('Connection closed');
+ws.onclose = () => console.log("Connection closed");
 ```
 
 ### Get Vehicle History
@@ -719,17 +728,18 @@ curl "http://localhost:5000/api/history/vehicle/ABC-1234" \
 
 ## 📊 Performance Metrics
 
-| Metric | Target | Status |
-|--------|--------|--------|
-| **Detection FPS** | 30 FPS @ 1080p | ✅ Achievable with GPU |
-| **Detection Accuracy** | >95% mAP | ✅ YOLOv8n: 94.3% mAP |
-| **ANPR Accuracy** | >90% plate recognition | ✅ Tesseract + preprocessing |
-| **Tracking Persistence** | >90% IOU match rate | ✅ DeepSORT algorithm |
-| **API Response Time** | <200ms (p95) | ✅ With Redis caching |
-| **Dashboard Update Latency** | <500ms (WebSocket) | ✅ Event-driven |
-| **System Throughput** | 10+ cameras/node | ✅ Horizontally scalable |
+| Metric                       | Target                 | Status                       |
+| ---------------------------- | ---------------------- | ---------------------------- |
+| **Detection FPS**            | 30 FPS @ 1080p         | ✅ Achievable with GPU       |
+| **Detection Accuracy**       | >95% mAP               | ✅ YOLOv8n: 94.3% mAP        |
+| **ANPR Accuracy**            | >90% plate recognition | ✅ Tesseract + preprocessing |
+| **Tracking Persistence**     | >90% IOU match rate    | ✅ DeepSORT algorithm        |
+| **API Response Time**        | <200ms (p95)           | ✅ With Redis caching        |
+| **Dashboard Update Latency** | <500ms (WebSocket)     | ✅ Event-driven              |
+| **System Throughput**        | 10+ cameras/node       | ✅ Horizontally scalable     |
 
 ### Scalability
+
 - **Horizontal Scaling**: Add more nodes to RabbitMQ cluster and services
 - **Vertical Scaling**: GPU support for increased detection throughput
 - **Database**: Connection pooling with 100+ concurrent connections
@@ -739,20 +749,21 @@ curl "http://localhost:5000/api/history/vehicle/ABC-1234" \
 
 ## 🎯 Use Cases
 
-| Use Case | Application | Benefit |
-|----------|-------------|---------|
-| **Smart City Parking** | Urban lot management across multiple locations | Reduce circling time by 30%, increase revenue |
-| **Airport Parking** | Automated lot guidance and enforcement | Faster space discovery, improved compliance |
-| **Enterprise Campuses** | Employee parking allocation and monitoring | Fair distribution, safety monitoring |
-| **Mall & Entertainment** | Dynamic pricing based on occupancy | Optimize revenue, improve UX |
-| **Parking Enforcement** | Automated violation detection | Catch expired meters, unauthorized zones |
-| **Valet Management** | Track valet-parked vehicles | Reduce car theft, improve accountability |
-| **Research & Analytics** | Parking pattern analysis | Optimize lot layouts, predict demand |
-| **EV Charging Lots** | Integration with charging stations | Track availability, manage queues |
+| Use Case                 | Application                                    | Benefit                                       |
+| ------------------------ | ---------------------------------------------- | --------------------------------------------- |
+| **Smart City Parking**   | Urban lot management across multiple locations | Reduce circling time by 30%, increase revenue |
+| **Airport Parking**      | Automated lot guidance and enforcement         | Faster space discovery, improved compliance   |
+| **Enterprise Campuses**  | Employee parking allocation and monitoring     | Fair distribution, safety monitoring          |
+| **Mall & Entertainment** | Dynamic pricing based on occupancy             | Optimize revenue, improve UX                  |
+| **Parking Enforcement**  | Automated violation detection                  | Catch expired meters, unauthorized zones      |
+| **Valet Management**     | Track valet-parked vehicles                    | Reduce car theft, improve accountability      |
+| **Research & Analytics** | Parking pattern analysis                       | Optimize lot layouts, predict demand          |
+| **EV Charging Lots**     | Integration with charging stations             | Track availability, manage queues             |
 
 ---
 
 ## 🗺 Roadmap
+
 - [x] Project folder structure
 - [ ] Detection + Tracking service implementation
 - [ ] Slot occupancy service
