@@ -22,6 +22,7 @@ services:
     volumes:
       - ./services/detection-service:/app
       - ./models:/app/models:ro
+      - ./shared:/app/shared:ro
 
   slot-service:
     environment:

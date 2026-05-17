@@ -1,0 +1,9 @@
+ultralytics
+opencv-python
+numpy
+deep-sort-realtime
+pika
+fastapi
+uvicorn
+jsonschema
+pytest

@@ -1,0 +1,56 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "vehicle.detected.v1",
+	"type": "object",
+	"additionalProperties": false,
+	"required": ["event_id", "timestamp", "frame_id", "camera_id", "vehicles"],
+	"properties": {
+		"event_id": {
+			"type": "string",
+			"format": "uuid"
+		},
+		"timestamp": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"frame_id": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"camera_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"vehicles": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["track_id", "class", "bbox", "confidence"],
+				"properties": {
+					"track_id": {
+						"type": "integer",
+						"minimum": 0
+					},
+					"class": {
+						"type": "string",
+						"minLength": 1
+					},
+					"bbox": {
+						"type": "array",
+						"minItems": 4,
+						"maxItems": 4,
+						"items": {
+							"type": "number"
+						}
+					},
+					"confidence": {
+						"type": "number",
+						"minimum": 0,
+						"maximum": 1
+					}
+				}
+			}
+		}
+	}
+}
