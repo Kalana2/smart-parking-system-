@@ -41,6 +41,12 @@ docker compose up --build detection-service
 
 Set `CAMERA_SOURCE` to an RTSP URL or a local video file path.
 
+If your environment cannot reach Docker Hub, pre-pull or mirror the Python base image and pass it as a build arg, for example:
+
+```bash
+docker build --build-arg PYTHON_IMAGE=your-registry/python:3.11-slim -t detection-service .
+```
+
 ## Tests
 
 Run the unit tests from the repo root:
