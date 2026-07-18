@@ -19,18 +19,30 @@ class PipelineState:
 		self.last_frame_jpeg = None
 		self.last_frame_ts = 0.0
 		self.last_error = None
-		self.lock = threading.Lock()
+		self.frame_lock = threading.Lock()
+		self.event_history = []
+		self.event_lock = threading.Lock()
 		self.ready_event = threading.Event()
 		self.stop_event = threading.Event()
 
 	def update_frame(self, jpeg_bytes):
-		with self.lock:
+		with self.frame_lock:
 			self.last_frame_jpeg = jpeg_bytes
 			self.last_frame_ts = time.time()
 
 	def get_frame(self):
-		with self.lock:
+		with self.frame_lock:
 			return self.last_frame_jpeg
+
+	def push_event(self, payload):
+		with self.event_lock:
+			self.event_history.append(payload)
+			if len(self.event_history) > 100:
+				self.event_history.pop(0)
+
+	def get_events(self):
+		with self.event_lock:
+			return list(self.event_history)
 
 
 def _utc_now():
@@ -42,6 +54,25 @@ def _encode_jpeg(frame):
 	if not ok:
 		return None
 	return buffer.tobytes()
+
+
+_TRACK_COLORS = [
+	(0, 255, 0),
+	(255, 0, 0),
+	(0, 0, 255),
+	(255, 255, 0),
+	(255, 0, 255),
+	(0, 255, 255),
+]
+
+
+def _draw_tracks(frame, tracks):
+	for i, track in enumerate(tracks):
+		x1, y1, x2, y2 = [int(v) for v in track["bbox"]]
+		color = _TRACK_COLORS[i % len(_TRACK_COLORS)]
+		cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+		label = f"#{track['track_id']} {track['class']}"
+		cv2.putText(frame, label, (x1, y1 - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
 
 def _capture_loop(state, config):
@@ -56,6 +87,7 @@ def _capture_loop(state, config):
 	frame_id = 0
 	camera_attempt = 0
 	capture = None
+	last_tracks = []
 
 	while not state.stop_event.is_set():
 		if capture is None or not capture.isOpened():
@@ -72,6 +104,10 @@ def _capture_loop(state, config):
 
 		ok, frame = capture.read()
 		if not ok:
+			if config.camera_loop:
+				capture.set(cv2.CAP_PROP_POS_FRAMES, 0)
+				tracker = Tracker()
+				continue
 			capture.release()
 			capture = None
 			camera_attempt += 1
@@ -79,42 +115,42 @@ def _capture_loop(state, config):
 			time.sleep(delay)
 			continue
 
+		if frame_id % config.frame_skip == 0:
+			detections = detector.detect(frame, config.confidence_threshold)
+			last_tracks = tracker.update(detections, frame)
+
+			vehicles = []
+			for track in last_tracks:
+				vehicles.append(
+					{
+						"track_id": track["track_id"],
+						"class": track["class"],
+						"bbox": [round(x, 2) for x in track["bbox"]],
+						"confidence": round(track["confidence"] or 0.0, 4),
+					}
+				)
+
+			payload = {
+				"event_id": str(uuid.uuid4()),
+				"timestamp": _utc_now(),
+				"frame_id": frame_id,
+				"camera_id": config.camera_id,
+				"vehicles": vehicles,
+			}
+
+			try:
+				publisher.publish(payload)
+				state.push_event(payload)
+				state.ready_event.set()
+			except Exception as exc:
+				state.last_error = str(exc)
+				return
+
+		_draw_tracks(frame, last_tracks)
+
 		jpeg_bytes = _encode_jpeg(frame)
 		if jpeg_bytes:
 			state.update_frame(jpeg_bytes)
-
-		if frame_id % config.frame_skip != 0:
-			frame_id += 1
-			continue
-
-		detections = detector.detect(frame, config.confidence_threshold)
-		tracks = tracker.update(detections, frame)
-
-		vehicles = []
-		for track in tracks:
-			vehicles.append(
-				{
-					"track_id": track["track_id"],
-					"class": track["class"],
-					"bbox": [round(x, 2) for x in track["bbox"]],
-					"confidence": round(track["confidence"] or 0.0, 4),
-				}
-			)
-
-		payload = {
-			"event_id": str(uuid.uuid4()),
-			"timestamp": _utc_now(),
-			"frame_id": frame_id,
-			"camera_id": config.camera_id,
-			"vehicles": vehicles,
-		}
-
-		try:
-			publisher.publish(payload)
-			state.ready_event.set()
-		except Exception as exc:
-			state.last_error = str(exc)
-			return
 
 		frame_id += 1
 
@@ -149,6 +185,11 @@ def readyz(response: Response):
 		return {"status": "ready"}
 	response.status_code = 503
 	return {"status": "starting"}
+
+
+@app.get("/events")
+def get_events():
+	return state.get_events()
 
 
 @app.get("/stream")

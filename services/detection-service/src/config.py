@@ -55,6 +55,7 @@ class Config:
 	rabbitmq_retry_base_sec: float
 	camera_retry_max: int
 	camera_retry_base_sec: float
+	camera_loop: bool
 	event_schema_path: str
 	preview_fps: int
 
@@ -63,7 +64,7 @@ def load_config():
 	return Config(
 		port=_get_int("PORT", "8001", minimum=1),
 		model_path=_get_env("MODEL_PATH", "/app/models/yolov8n.pt"),
-		camera_source=_get_env("CAMERA_SOURCE", "rtsp://your-camera-url"),
+		camera_source=_get_env("CAMERA_SOURCE", "/app/videos/sample.mp4"),
 		camera_id=os.getenv("CAMERA_ID", "cam_01"),
 		confidence_threshold=_get_float("CONFIDENCE_THRESHOLD", "0.5", minimum=0.0, maximum=1.0),
 		frame_skip=_get_int("FRAME_SKIP", "3", minimum=1),
@@ -77,6 +78,7 @@ def load_config():
 		rabbitmq_retry_base_sec=_get_float("RABBITMQ_RETRY_BASE_SEC", "1.0", minimum=0.1),
 		camera_retry_max=_get_int("CAMERA_RETRY_MAX", "5", minimum=0),
 		camera_retry_base_sec=_get_float("CAMERA_RETRY_BASE_SEC", "1.0", minimum=0.1),
+		camera_loop=os.getenv("CAMERA_LOOP", "true").lower() == "true",
 		event_schema_path=os.getenv(
 			"EVENT_SCHEMA_PATH", "/app/shared/events/vehicle.detected.v1.json"
 		),

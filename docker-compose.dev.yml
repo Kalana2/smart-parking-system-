@@ -19,10 +19,13 @@ services:
       NODE_ENV: development
       PYTHONUNBUFFERED: "1"
       WATCHFILES_FORCE_POLLING: "true"
+      CAMERA_SOURCE: /app/videos/sample.mp4
+      CAMERA_LOOP: "true"
     volumes:
-      - ./services/detection-service:/app
+      - ./services/detection-service/src:/app
       - ./models:/app/models:ro
       - ./shared:/app/shared:ro
+      - ./videos:/app/videos:ro
 
   slot-service:
     environment:
